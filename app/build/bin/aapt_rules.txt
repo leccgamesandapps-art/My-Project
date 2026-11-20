@@ -1,0 +1,6 @@
+# view AndroidManifest.xml #generated:43
+-keep class com.lexus.chessmod.Launcher { <init>(...); }
+
+# view AndroidManifest.xml #generated:26
+-keep class com.lexus.chessmod.MainActivity { <init>(...); }
+

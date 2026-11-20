@@ -1,0 +1,131 @@
+if you see the line
+const char *features[] = {};
+in side {}
+
+- you can add the following code here
+            OBFUSCATE("Category_The Category"), //Not counted
+            OBFUSCATE("Toggle_The toggle"),
+            OBFUSCATE(
+                    "100_Toggle_True_The toggle 2"), //This one have feature number assigned, and switched on by default
+            OBFUSCATE("110_Toggle_The toggle 3"), //This one too
+            OBFUSCATE("SeekBar_The slider_1_100"),
+            OBFUSCATE("SeekBar_Kittymemory slider example_1_5"),
+            OBFUSCATE("Spinner_The spinner_Items 1,Items 2,Items 3"),
+            OBFUSCATE("Button_The button"),
+            OBFUSCATE("ButtonLink_The button with link_https://www.youtube.com/"), //Not counted
+            OBFUSCATE("ButtonOnOff_The On/Off button"),
+            OBFUSCATE("CheckBox_The Check Box"),
+            OBFUSCATE("InputValue_Input number"),
+            OBFUSCATE("InputValue_1000_Input number 2"), //Max value
+            OBFUSCATE("InputText_Input text"),
+            OBFUSCATE("RadioButton_Radio buttons_OFF,Mod 1,Mod 2,Mod 3"),
+
+            //Create new collapse
+            OBFUSCATE("Collapse_Collapse 1"),
+            OBFUSCATE("CollapseAdd_Toggle_The toggle"),
+            OBFUSCATE("CollapseAdd_Toggle_The toggle"),
+            OBFUSCATE("123_CollapseAdd_Toggle_The toggle"),
+            OBFUSCATE("122_CollapseAdd_CheckBox_Check box"),
+            OBFUSCATE("CollapseAdd_Button_The button"),
+
+            //Create new collapse again
+            OBFUSCATE("Collapse_Collapse 2_True"),
+            OBFUSCATE("CollapseAdd_SeekBar_The slider_1_100"),
+            OBFUSCATE("CollapseAdd_InputValue_Input number"),
+
+            OBFUSCATE("RichTextView_This is text view, not fully HTML."
+                      "<b>Bold</b> <i>italic</i> <u>underline</u>"
+                      "<br />New line <font color='red'>Support colors</font>"
+                      "<br/><big>bigger Text</big>"),
+            OBFUSCATE("RichWebView_<html><head><style>body{color: white;}</style></head><body>"
+                      "This is WebView, with REAL HTML support!"
+                      "<div style=\"background-color: darkblue; text-align: center;\">Support CSS</div>"
+                      "<marquee style=\"color: green; font-weight:bold;\" direction=\"left\" scrollamount=\"5\" behavior=\"scroll\">This is <u>scrollable</u> text</marquee>"
+                      "</body></html>")
+                      
+
+
+if wanted OBFUSCATE funtion
+see the line
+switch (featNum) {}
+inside {}
+
+- you can add funtion following code here
+            case -10: // Menu icon spinner (0 = Icon 1)
+            g_menuIconIndex = value;
+            if (g_menuIconIndex < 0) g_menuIconIndex = 0;
+            if (g_menuIconIndex > 12) g_menuIconIndex = 12;
+            break;
+        case 0:
+            // A much simpler way to patch hex via KittyMemory without need to specify the struct and len. Spaces or without spaces are fine
+            // ARMv7 assembly example
+            // MOV R0, #0x0 = 00 00 A0 E3
+            // BX LR = 1E FF 2F E1
+            PATCH_LIB_SWITCH("libil2cpp.so", "0x100000", "00 00 A0 E3 1E FF 2F E1", boolean);
+            break;
+        case 100:
+            //Reminder that the strings are auto obfuscated
+            //Switchable patch
+            PATCH_SWITCH("0x400000", "00 00 A0 E3 1E FF 2F E1", boolean);
+            PATCH_LIB_SWITCH("libil2cpp.so", "0x200000", "00 00 A0 E3 1E FF 2F E1", boolean);
+            PATCH_SYM_SWITCH("_SymbolExample", "00 00 A0 E3 1E FF 2F E1", boolean);
+            PATCH_LIB_SYM_SWITCH("libNativeGame.so", "_SymbolExample", "00 00 A0 E3 1E FF 2F E1", boolean);
+
+            //Restore patched offset to original
+            RESTORE("0x400000");
+            RESTORE_LIB("libil2cpp.so", "0x400000");
+            RESTORE_SYM("_SymbolExample");
+            RESTORE_LIB_SYM("libil2cpp.so", "_SymbolExample");
+            break;
+        case 110:
+            break;
+        case 1:
+            if (value >= 1) {
+                sliderValue = value;
+            }
+            break;
+        case 2:
+            switch (value) {
+                //For noobies
+                case 0:
+                    RESTORE("0x0");
+                    break;
+                case 1:
+                    PATCH("0x0", "01 00 A0 E3 1E FF 2F E1");
+                    break;
+                case 2:
+                    PATCH("0x0", "02 00 A0 E3 1E FF 2F E1");
+                    break;
+            }
+            break;
+        case 3:
+            switch (value) {
+                case 0:
+                    LOGD(OBFUSCATE("Selected item 1"));
+                    break;
+                case 1:
+                    LOGD(OBFUSCATE("Selected item 2"));
+                    break;
+                case 2:
+                    LOGD(OBFUSCATE("Selected item 3"));
+                    break;
+            }
+            break;
+        case 4:
+            // Since we have instanceBtn as a field, we can call it out of Update hook function
+            if (instanceBtn != NULL)
+                AddMoneyExample(instanceBtn, 999999);
+            // MakeToast(env, obj, OBFUSCATE("Button pressed"), Toast::LENGTH_SHORT);
+            break;
+        case 5:
+            break;
+        case 6:
+            featureHookToggle = boolean;
+            break;
+        case 7:
+            level = value;
+            break;
+        case 8:
+            break;
+        case 9:
+            break;
